@@ -57,7 +57,7 @@ joinChannel () {
         setGlobals $1
         ch=5
         joinWithRetry $ch
-        echo "===================== PEER$ch joined on the channel \"$CHANNEL_NAME\" ==$
+        echo "===================== PEER$ch joined on the channel \"$CHANNEL_NAME\" =============="
         sleep $DELAY
         echo
         
@@ -69,7 +69,7 @@ installChaincode () {
         res=$?
         cat log.txt
         verifyResult $res "Chaincode installation on remote peer PEER$PEER has Failed"
-        echo "===================== Chaincode is installed on remote peer PEER$PEER ==========$
+        echo "===================== Chaincode is installed on remote peer PEER$PEER ==========="
         echo
 }
 
