@@ -1,4 +1,4 @@
-
+#!/bin/bash
 echo
 echo " ____    _____      _      ____    _____ "
 echo "/ ___|  |_   _|    / \    |  _ \  |_   _|"
@@ -55,6 +55,7 @@ joinWithRetry () {
 
 joinChannel () {
         setGlobals $1
+        ch=5
         joinWithRetry $ch
         echo "===================== PEER$ch joined on the channel \"$CHANNEL_NAME\" ==$
         sleep $DELAY
