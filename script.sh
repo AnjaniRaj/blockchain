@@ -14,7 +14,7 @@ DELAY="$2"
 : ${TIMEOUT:="60"}
 COUNTER=1
 MAX_RETRY=5
-ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/exam$
+ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
 echo "Channel name : "$CHANNEL_NAME
 
@@ -30,8 +30,8 @@ verifyResult () {
 
 setGlobals () {
         CORE_PEER_LOCALMSPID="Org1MSP"
-        CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer$
-        CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/cry$
+        CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+        CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
         CORE_PEER_ADDRESS=peer$1.org1.example.com:7051
         env |grep CORE
 }
@@ -64,7 +64,7 @@ joinChannel () {
 installChaincode () {
         PEER=$1
         setGlobals $PEER
-        peer chaincode install -n mycc -v 1.0 -p github.com/hyperledger/fabric/examples/chainc$
+        peer chaincode install -n mycc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincoode/go/chaincode_example02 >&log.txt
         res=$?
         cat log.txt
         verifyResult $res "Chaincode installation on remote peer PEER$PEER has Failed"
@@ -74,7 +74,7 @@ installChaincode () {
 
 ## Join all the peers to the channel
 echo "Having all peers join the channel..."
-joinChannel
+joinChannel $1
 
 echo "Install chaincode on org1/peer2..."
 installChaincode $1
