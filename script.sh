@@ -39,7 +39,7 @@ setGlobals () {
 
 ## Sometimes Join takes time hence RETRY atleast for 5 times
 joinWithRetry () {
-        peer channel join -b $CHANNEL_NAME.block  >&log.txt
+        peer channel join -b genesis_block.pb  >&log.txt
         res=$?
         cat log.txt
         if [ $res -ne 0 -a $COUNTER -lt $MAX_RETRY ]; then
